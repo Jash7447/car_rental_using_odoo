@@ -1,0 +1,126 @@
+<odoo>
+
+    <record id="action_getting_customer_bookings" model="ir.actions.act_window">
+        <field name="name">Car bookings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">book.ride</field>
+        <field name="domain">[('car1', '=', active_ids)]</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="car_rental.book_ride_tree_view"/>
+        <field name="binding_model_id" ref="model_car_data"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Car hasn't been booked till now.
+          </p>
+        </field>
+    </record>
+
+    <record id="car_data_tree_view" model="ir.ui.view">
+        <field name="name">Car Data Tree View</field>
+        <field name="model">car.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="car_name"/>
+                <field name="brand"/>
+                <field name="car_type"/>
+                <field name="seat"/>
+                <field name="rent_price"/>
+                <field name="car_status" decoration-success="car_status == 'working'" decoration-danger="car_status != 'working'" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="car_data_form_view" model="ir.ui.view">
+        <field name="name">Car Data Form View</field>
+        <field name="model">car.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_car_bookings" type="object" class="oe_stat_button" icon="fa-calendar">
+                            <div class="o_stat_info">
+                                <field name="car_bookings_count" class="o_stat_value"/>
+                                <span class="o_stat_text">Bookings</span>
+                            </div>
+                        </button>
+                    </div>
+                    <header>
+                        <button name="working_action" string="working" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('car_status','in',['working'])]}"/>
+                        <button name="maintenance_action" string="Under Maintenance" type="object"
+                                class="oe_highlight"/>
+                        <button name="action_not_available" string="Not Available" type="object"
+                                class="oe_highlight"/>
+                        <field name="car_status" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="car_type" string="Car type" placeholder="Enter car type"/>
+                            <field name="brand" string="Brand" placeholder="Enter brand name"/>
+                            <field name="car_name" string="Car model" placeholder="Enter car name"/>
+                            <field name="seat" string="Seats" placeholder="Enter number of seats"/>
+                            <field name="rent_price" placeholder="Enter rent price per day"/>
+                        </group>
+                        <group>
+                            <field name="photo" widget="image"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="car_data_kanban_view" model="ir.ui.view">
+        <field name="name">car data kanban View</field>
+        <field name="model">car.data</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="car_name"/>
+                <field name="photo"/>
+                <field name="brand"/>
+                <field name="id"/>
+                <field name="seat"/>
+                <field name="car_type"/>
+                <field name="rent_price"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                          <div>
+                              <img alt="'Avatar"
+                                   t-att-src="kanban_image('car.data','photo',record.id.raw_value)" widht="70" height="70"/>
+
+                          </div>
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong>
+                                    <field name="car_name"/>
+                                </strong>
+                                <ul>
+                                    <li>Brand:-
+                                        <field name="brand"/>
+                                    </li>
+                                    <li>Car Type:-
+                                        <field name="car_type"/>
+                                    </li>
+                                    <li>Seat:-
+                                        <field name="seat"/>
+                                    </li>
+                                    <li>Price/day:-
+                                        <field name="rent_price"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="action_car_data_info" model="ir.actions.act_window">
+        <field name="name">Car_info</field>
+        <field name="res_model">car.data</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+</odoo>

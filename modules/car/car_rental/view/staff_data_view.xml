@@ -1,0 +1,155 @@
+<odoo>
+
+<!--    <record id="action_getting_customer_bookings" model="ir.actions.act_window">-->
+<!--        <field name="name">Bookings_customer</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">book.ride</field>-->
+<!--        <field name="domain">[('cus_name', '=', active_ids)]</field>-->
+<!--&lt;!&ndash;        <field name="view_type">form</field>&ndash;&gt;-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--        <field name="view_id" ref="car_rental.book_ride_tree_view"/>-->
+<!--        <field name="binding_model_id" ref="model_car_rental"/>-->
+<!--        <field name="help" type="html">-->
+<!--          <p class="o_view_nocontent_smiling_face">-->
+<!--            Book your first car !-->
+<!--          </p>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="action_marking_submit" model="ir.actions.server">-->
+<!--        <field name="name">Mark as submitted</field>-->
+<!--        <field name="model_id" ref="model_car_rental"/>-->
+<!--        <field name="binding_model_id" ref="model_car_rental"/>-->
+<!--        <field name="binding_view_types">form,list</field>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">action = records.action_submit()</field>-->
+<!--    </record>-->
+
+<!--    <record id="action_marking_draft" model="ir.actions.server">-->
+<!--        <field name="name">Mark as draft</field>-->
+<!--        <field name="model_id" ref="model_car_rental"/>-->
+<!--        <field name="binding_model_id" ref="model_car_rental"/>-->
+<!--        <field name="binding_view_types">form,list</field>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">action = records.action_draft()</field>-->
+<!--    </record>-->
+
+    <record id="staff_data_tree_view" model="ir.ui.view">
+        <field name="name">Staff Data Tree View</field>
+        <field name="model">staff.data</field>
+        <field name="arch" type="xml">
+            <tree>
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="city"/>
+                    <field name="role"/>
+                    <field name="status" decoration-success="status == 'approved'" decoration-danger="status == 'draft'" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="staff_form_view" model="ir.ui.view">
+        <field name="name">Staff Data Form View</field>
+        <field name="model">staff.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+<!--                    <div class="oe_button_box" name="button_box">-->
+<!--                        <button name="action_open_bookings" type="object" class="oe_stat_button" icon="fa-calendar">-->
+<!--                            <div class="o_stat_info">-->
+<!--                                <field name="bookings_count" class="o_stat_value"/>-->
+<!--                                <span class="o_stat_text">Bookings</span>-->
+<!--                            </div>-->
+<!--                        </button>-->
+<!--                    </div>-->
+                    <header>
+                        <button name="submit_action" string="Submit" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('status','in',['submitted','cancel','draft'])]}"/>
+                        <button name="action_cancel" string="Cancel" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('status','in',['submitted','cancel'])]}"/>
+                        <button name="action_draft" string="Add to drft" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('status','in',['submitted','draft'])]}"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <group>
+
+                            <field name="name" string="Name" placeholder="Enter your name here"/>
+                            <field name="age" string="Age"/>
+                            <field name="phone" string="Phone Number" placeholder="Enter your phone number here"/>
+                            <field name="email" string="Email" placeholder="abc@gmail.com"/>
+                        </group>
+                        <group>
+                            <field name="city" string="City" placeholder="Select your city"/>
+                            <field name="role" string="Role" placeholder="Select a role"/>
+                            <field name="proof" string="valid proof(Adhar/licence)"/>
+                        </group>
+<!--                        <footer>-->
+<!--                            <button type="action" string="Check All Bookings" name="%(car_rental.action_book_ride_info)d" domain="[('cus_name','=',active_id)]"/>-->
+<!--                        </footer>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="staff_data_graph_view" model="ir.ui.view">
+        <field name="name">staff data graph view</field>
+        <field name="model">staff.data</field>
+        <field name="arch" type="xml">
+            <graph string="City wise staff availability">
+                <field name="city" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="staff_data_kanban_view" model="ir.ui.view">
+        <field name="name">staff data kanban View</field>
+        <field name="model">staff.data</field>
+        <field name="arch" type="xml">
+            <kanban>
+
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="city"/>
+                <field name="role"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>role:-
+                                        <field name="role"/>
+                                    </li>
+                                    <li>Age:-
+                                        <field name="age"/>
+                                    </li>
+                                    <li>City:-
+                                        <field name="city"/>
+                                    </li>
+                                    <li>Phone:-
+                                        <field name="phone"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_staff_data_info" model="ir.actions.act_window">
+        <field name="name">Staff Information</field>
+        <field name="res_model">staff.data</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+    </record>
+
+</odoo>

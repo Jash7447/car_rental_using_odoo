@@ -1,0 +1,254 @@
+<odoo>
+    <template id="billing_customer_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="pt-5">
+                        <table class="table table-condensed" style="border: 2px solid black;">
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td colspan="3" class="text-center">
+                                                <span t-field="o.cus_name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Age</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <strong>:</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.cus_age"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Phone</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <strong>:</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.cus_phone"/>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Email</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <strong>:</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.cus_email"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>City</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <strong>:</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.cus_city"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Address</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <strong>:</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.cus_address"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="address row">
+                            <div name="address" class="col-5" style="margin-left: auto">
+                                <address>
+                                    <address class="mb-0" itemscope="itemscope">
+                                        <div>
+                                            <span itemprop="name">Deco Addict</span>
+                                        </div>
+                                        <div itemprop="address" itemscope="itemscope">
+                                            <div class="d-flex align-items-baseline">
+                                                <span class="w-100 o_force_ltr" itemprop="streetAddress">77 Santa
+                                                    Barbara
+                                                    Rd<br/>Pleasant Hill CA 94523<br/>United States
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </address>
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <h2>
+                            <span>Invoice</span>
+                            <span>INV/</span>
+                            <span t-field="o.date_today"/>
+                            <span>//</span>
+                            <span t-field="o.id"/>
+                        </h2>
+                        <div id="informations" class="row mt32 mb32">
+                            <div class="col-auto mw-100 mb-2" name="invoice_date">
+                                <strong>Start Date:</strong>
+                                <p>
+                                    <span t-field="o.ride_start_dt"/>
+                                </p>
+                            </div>
+                            <div class="col-auto mw-100 mb-2" name="due_date">
+                                <strong>End Date:</strong>
+                                <p>
+                                    <span t-field="o.ride_end_date"/>
+                                </p>
+                            </div>
+                        </div>
+                        <table class="table table-sm o_main_table" name="invoice_line_table">
+                            <thead>
+                                <tr>
+                                    <th name="th_description" class="text-left">
+                                        <span>Description</span>
+                                    </th>
+                                    <th name="th_priceunit" class="text-center d-md-table-cell">
+                                        <span>Total days</span>
+                                    </th>
+                                    <th name="th_driver" class="text-center d-md-table-cell">
+                                        <span>Driver booking</span>
+                                    </th>
+                                    <th name="th_taxes" class="text-center d-md-table-cell">
+                                        <span>Taxes</span>
+                                    </th>
+                                    <th name="th_subtotal" class="text-right">
+                                        <span>Rent price per day</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="invoice_tbody">
+                                <tr>
+                                    <td name="account_invoice_line_name">
+                                        <span>Car model
+                                            <br/>
+                                        </span>
+                                        <span t-field="o.car1"/>
+                                    </td>
+
+                                    <td class="text-center d-md-table-cell">
+                                        <span class="text-nowrap" t-field="o.days_interval"/>
+                                    </td>
+                                    <td class="text-center d-md-table-cell">
+                                        <span id="line_driver_req" t-field="o.driver_req"/>
+                                    </td>
+                                    <td class="text-center d-md-table-cell">
+                                        <span id="line_tax_ids">15.00%</span>
+                                    </td>
+                                    <td class="text-right o_price_total">
+                                        <span class="text-nowrap">₹
+                                            <span class="oe_currency_value" t-field="o.cost_per_day1"/>
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="clearfix">
+                            <div id="total" class="row">
+                                <div class="col-7 ml-auto">
+                                    <table class="table table-sm" style="page-break-inside: avoid; position:relative;">
+                                        <tbody>
+                                            <tr class="border-black o_subtotal" style="">
+                                                <td>
+                                                    <strong>Subtotal</strong>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span>₹
+                                                        <span class="oe_currency_value" t-field="o.total_cost"/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="border-black">Tax 15%</span>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span>₹
+                                                        <t class="oe_currency_value" t-esc="o.total_cost * 0.15"
+                                                           t-options='{"widget": "float", "precision": 2}'/>
+                                                    </span>
+                                                </td>
+                                                <!--                                                <td class="text-right">-->
+                                                <!--                                                    <span>₹-->
+                                                <!--                                                        <span t-field="o.total_cost"/>-->
+                                                <!--                                                    </span>-->
+                                                <!--                                                </td>-->
+                                            </tr>
+                                            <tr class="border-black o_total">
+                                                <td>
+                                                    <strong>Total</strong>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span>₹
+                                                        <t class="oe_currency_value"
+                                                           t-esc="o.total_cost + (o.total_cost * 0.15)"
+                                                           t-options='{"widget": "float", "precision": 2}'/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            Please use the following communication for your payment :
+                            <b>
+                                <span>INV/</span>
+                                <span t-field="o.date_today"/>
+                                <span>//</span>
+                                <span t-field="o.id"/>
+                            </b>
+                        </p>
+                        <p name="payment_term">
+                            <span>Payment terms: 30 Days</span>
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

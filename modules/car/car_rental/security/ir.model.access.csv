@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_car_rental,access_car_rental,model_car_rental,,1,1,1,1
+access_car_data,access_car_data,model_car_data,,1,1,1,1
+access_car_checkout,access_car_checkout,model_car_checkout,,1,1,1,1
+access_book_ride,access_book_ride,model_book_ride,base.group_user,1,1,1,1
+access_book_ride_wizard,access_book_ride_wizard,model_book_ride_wizard,,1,1,1,1
+access_customer_bookings,access_customer_bookings,model_customer_bookings,,1,1,1,1
+access_checkout_slots,access_checkout_slots,model_checkout_slots,,1,1,1,1
+access_staff_data,access_staff_data,model_staff_data,,1,1,1,1

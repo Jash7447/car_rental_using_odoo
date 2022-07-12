@@ -1,0 +1,39 @@
+<odoo>
+
+    <record id ="time_01" model="checkout.slots">
+        <field name="time_slots">10:00 to 11:00</field>
+    </record>
+
+    <record id ="time_02" model="checkout.slots">
+        <field name="time_slots">11:00 to 12:00</field>
+    </record>
+
+    <record id ="time_03" model="checkout.slots">
+        <field name="time_slots">12:00 to 13:00</field>
+    </record>
+
+    <record id ="time_04" model="checkout.slots">
+        <field name="time_slots">14:00 to 15:00</field>
+    </record>
+
+    <record id ="time_05" model="checkout.slots">
+        <field name="time_slots">15:00 to 16:00</field>
+    </record>
+
+    <record id ="time_06" model="checkout.slots">
+        <field name="time_slots">16:00 to 17:00</field>
+    </record>
+
+    <record id ="time_07" model="checkout.slots">
+        <field name="time_slots">17:00 to 18:00</field>
+    </record>
+
+    <record id ="time_08" model="checkout.slots">
+        <field name="time_slots">18:00 to 19:00</field>
+    </record>
+
+    <record id ="time_09" model="checkout.slots">
+        <field name="time_slots">19:00 to 20:00</field>
+    </record>
+
+</odoo>

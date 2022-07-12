@@ -1,0 +1,228 @@
+<odoo>
+
+    <record id="action_getting_customer_bookings" model="ir.actions.act_window">
+        <field name="name">Bookings_customer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">book.ride</field>
+        <field name="domain">[('cus_name', '=', active_ids)]</field>
+<!--        <field name="view_type">form</field>-->
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="car_rental.book_ride_tree_view"/>
+        <field name="binding_model_id" ref="model_car_rental"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Book your first car !
+          </p>
+        </field>
+    </record>
+
+    <record id="action_marking_submit" model="ir.actions.server">
+        <field name="name">Mark as submitted</field>
+        <field name="model_id" ref="model_car_rental"/>
+        <field name="binding_model_id" ref="model_car_rental"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_submit()</field>
+    </record>
+
+    <record id="action_marking_draft" model="ir.actions.server">
+        <field name="name">Mark as draft</field>
+        <field name="model_id" ref="model_car_rental"/>
+        <field name="binding_model_id" ref="model_car_rental"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_draft()</field>
+    </record>
+
+    <record id="car_rental_tree_view" model="ir.ui.view">
+        <field name="name">Car Rental Tree View</field>
+        <field name="model">car.rental</field>
+        <field name="arch" type="xml">
+            <tree>
+                    <header>
+                        <button name="action_draft" string="Mark as draft" type="object"/>
+                    </header>
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="city"/>
+                    <field name="address"/>
+                    <field name="status" decoration-success="status == 'submitted'" decoration-danger="status == 'draft'" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="car_rental_form_view" model="ir.ui.view">
+        <field name="name">Car Rental Form View</field>
+        <field name="model">car.rental</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_bookings" type="object" class="oe_stat_button" icon="fa-calendar">
+                            <div class="o_stat_info">
+                                <field name="bookings_count" class="o_stat_value"/>
+                                <span class="o_stat_text">Bookings</span>
+                            </div>
+                        </button>
+                    </div>
+                    <header>
+                        <button name="submit_action" string="Submit" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('status','in',['submitted','cancel'])]}"/>
+                        <button name="action_cancel" string="Cancel" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('status','in',['submitted','cancel'])]}"/>
+                        <button name="action_draft" string="Add to drft" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('status','in',['submitted','draft'])]}"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <group>
+
+                            <field name="name" string="Name" placeholder="Enter your name here"/>
+                            <field name="age" string="Age"/>
+                            <field name="phone" string="Phone Number" placeholder="Enter your phone number here"/>
+                            <field name="email" string="Email" placeholder="abc@gmail.com"/>
+                        </group>
+                        <group>
+                            <field name="city" string="City" placeholder="Select city where you want to rent car."/>
+                            <field name="address" string="Address" placeholder="Enter your complete address"/>
+                            <field name="proof" string="valid proof(Adhar/licence)"/>
+                        </group>
+<!--                        <group>-->
+<!--                            <field name="cus_booking" string="Customer Bookings" placeholder="Customer booking data">-->
+<!--                                <tree>-->
+<!--                                    <field name="sequence" widget="handle"/>-->
+<!--                                    <field name="driver_req1"/>-->
+<!--                                    <field name="ride_start_dt1"/>-->
+<!--                                    <field name="ride_end_date1"/>-->
+<!--                                    <field name="car2"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--&lt;!&ndash;                                <form>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="driver_req1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="ride_start_dt1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field. name="ride_end_date1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="car2"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </form>&ndash;&gt;-->
+<!--                        </group>-->
+
+                        <footer>
+                            <button type="action" string="Check All Bookings" name="%(car_rental.action_book_ride_info)d" domain="[('cus_name','=',active_id)]"/>
+                        </footer>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    trial......-->
+<!--    <record id="finding_customer_bookings" model="ir.actions.act_window">-->
+<!--        <field name="name">Messages</field>-->
+<!--        <field name="src_model">book.ride</field>-->
+<!--        <field name="res_model">car.rental</field>-->
+<!--        <field name="view_mode">tree</field>-->
+<!--        <field name="view_id" ref="car_rental.book_ride"/>-->
+<!--        <field name="context">{'name': active_id}</field>-->
+<!--        <field name="domain">['|', ('author_id', '=', active_id) ,('notified_partner_ids', '=', active_id)]</field>-->
+<!--    </record>-->
+
+<!--    not to be used-->
+<!--    <record id="car_extend_form_view" model="ir.ui.view">-->
+<!--        <field name="name">Car extend Form View</field>-->
+<!--        <field name="model">car.data</field>-->
+<!--        <field name="inherit_id" ref="car_data_form_view" />-->
+<!--        <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='seat']" position="after">-->
+<!--                    <field name="car_bookings"/>-->
+<!--                </xpath>-->
+
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="car_rental_search_view" model="ir.ui.view">
+        <field name="name">Car rental search View</field>
+        <field name="model">car.rental</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="email"/>
+                <group string="Group By">
+                    <filter name="name" string="Costumer Name" context="{'group_by':'name'}"/>
+                </group>
+<!--                <group string="Group By">-->
+<!--                    <filter name="start_dt" string="Start Date" context="{'group_by':'start_dt'}"/>-->
+<!--                </group>-->
+            </search>
+        </field>
+    </record>
+
+<!--    <record id="car_rental_calendar_view" model="ir.ui.view">-->
+<!--        <field name="name">car rental calendar view</field>-->
+<!--        <field name="model">car.rental</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <calendar date_start="start_dt">-->
+<!--                <field name="name"/>-->
+<!--            </calendar>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="car_rental_graph_view" model="ir.ui.view">
+        <field name="name">car rental graph view</field>
+        <field name="model">car.rental</field>
+        <field name="arch" type="xml">
+            <graph string="City wise demand">
+                <field name="city" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="car_rental_kanban_view" model="ir.ui.view">
+        <field name="name">car rental kanban View</field>
+        <field name="model">car.rental</field>
+        <field name="arch" type="xml">
+            <kanban>
+
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="city"/>
+                <field name="address"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>email:-
+                                        <field name="email"/>
+                                    </li>
+                                    <li>Age:-
+                                        <field name="age"/>
+                                    </li>
+                                    <li>City:-
+                                        <field name="city"/>
+                                    </li>
+                                    <li>Phone:-
+                                        <field name="phone"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_car_rental_info" model="ir.actions.act_window">
+        <field name="name">Customer_information</field>
+        <field name="res_model">car.rental</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+    </record>
+
+</odoo>

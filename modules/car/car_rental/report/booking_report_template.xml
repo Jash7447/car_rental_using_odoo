@@ -1,0 +1,240 @@
+<odoo>
+    <template id="booking_customer_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+<!--                    <div class="oe_structure"/>-->
+                    <div class="page"/>
+                        <div class="col-xs-8">
+                          <table class="table table-condensed" style="border: 3px solid black !important;">
+                              <tr>
+                                  <td>
+                                      <table>
+                                          <tr>
+                                              <td colspan="3" class="text-center">
+                                                  <span t-field="o.cus_name"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Age </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.cus_age"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Phone </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.cus_phone"/>
+                                              </td>
+                                          </tr>
+
+                                      </table>
+                                  </td>
+                                  <td>
+                                      <table>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Email </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.cus_email"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>City </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.cus_city"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Address </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.cus_address"/>
+                                              </td>
+                                          </tr>
+                                      </table>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <table>
+                                          <tr>
+                                              <td colspan="2" class="text-center">
+                                                  <span>
+                                                      <strong>Booking: </strong>
+                                                  </span>
+                                              </td>
+                                          </tr>
+                                      </table>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      <table>
+                                          <tr>
+                                              <td colspan="3" class="text-center">
+                                                  <span t-field="o.car1"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Start Date  </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.ride_start_dt"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>End Date </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.ride_end_date"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Check-out time slot </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.checkout_time_slots"/>
+                                              </td>
+                                          </tr>
+                                      </table>
+                                  </td>
+                                  <td>
+                                      <table>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Driver </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.driver_req"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Cost per day </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.cost_per_day"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Total Days </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.days_interval"/>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                  <span>
+                                                      <strong>Total Charge </strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span>
+                                                      <strong>:</strong>
+                                                  </span>
+                                              </td>
+                                              <td>
+                                                  <span t-field="o.total_cost"/>
+                                              </td>
+                                          </tr>
+                                      </table>
+                                  </td>
+                              </tr>
+                          </table>
+                        </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

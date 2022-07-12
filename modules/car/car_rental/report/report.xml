@@ -1,0 +1,29 @@
+<odoo>
+    <record id="booking_customer_report" model="ir.actions.report">
+        <field name="name">Booking Report</field>
+        <field name="model">book.ride</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">car_rental.booking_customer_report</field>
+        <field name="report_file">car_rental.booking_customer_report</field>
+        <field name="binding_model_id" ref="model_book_ride"/>
+        <field name="binding_type" >report</field>
+    </record>
+
+    <record id="billing_customer_report" model="ir.actions.report">
+        <field name="name">Billing Invoice</field>
+        <field name="model">book.ride</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">car_rental.billing_customer_report</field>
+        <field name="report_file">car_rental.billing_customer_report</field>
+        <field name="binding_model_id" ref="model_book_ride"/>
+        <field name="binding_type" >report</field>
+    </record>
+
+<!--    <record-->
+<!--        id="booking_report_new"-->
+<!--        string="Print Booking"-->
+<!--        model="book.ride"-->
+<!--        report_type="qweb-pdf"-->
+<!--        name="car_rental.booking_report1"-->
+<!--        file="car_rental.booking_report1"/>-->
+</odoo>

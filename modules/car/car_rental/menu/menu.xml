@@ -1,0 +1,52 @@
+<odoo>
+
+    <menuitem id="Car_rental_parent_menu"
+              name="car_rental"
+              sequence="1"/>
+
+    <menuitem id="general_information_parent_menu"
+              name="General Information"
+              parent="Car_rental_parent_menu"
+              sequence="1"/>
+
+    <menuitem id="customer_information_sub_menu"
+              name="customer information"
+              parent="general_information_parent_menu"
+              action="car_rental.action_car_rental_info"
+              sequence="1"/>
+
+    <menuitem id="staff_data_sub_menu"
+              name="Staff information"
+              parent="general_information_parent_menu"
+              action="car_rental.action_staff_data_info"
+              sequence="2"/>
+
+    <menuitem id="car_data_sub_menu"
+              name="Car Data"
+              parent="Car_rental_parent_menu"
+              action="car_rental.action_car_data_info"
+              sequence="2"/>
+
+    <menuitem id="Book_ride_parent_menu"
+              name="Book ride"
+              parent="Car_rental_parent_menu"
+              sequence="3"/>
+
+    <menuitem id="book_ride_sub_menu"
+              name="Book ride"
+              parent="Book_ride_parent_menu"
+              action="car_rental.action_book_ride_info"
+              sequence="1"/>
+
+    <menuitem id="book_ride_create_menu"
+              name="Create booking"
+              parent="Book_ride_parent_menu"
+              action="car_rental.action_book_ride_wizard_info"
+              sequence="2"/>
+
+    <menuitem id="car_checkout_sub_menu"
+              name="Checkout"
+              parent="Car_rental_parent_menu"
+              action="car_rental.action_car_checkout_info"
+              sequence="4"/>
+</odoo>

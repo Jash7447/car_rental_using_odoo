@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="checkout_inherit_tree_view" model="ir.ui.view">
+        <field name="name">checkout.inherit.tree.view</field>
+        <field name="model">car.checkout</field>
+        <field name="inherit_id" ref="car_rental.car_checkout_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='customer_name']" position="after">
+                <field name="booking_id"/>
+            </xpath>
+        </field>
+    </record>
+
+
+<!--    <record id="action_checkout_inherit_info" model="ir.actions.act_window">-->
+<!--        <field name="name">checkout_inherit</field>-->
+<!--        <field name="res_model">checkout.inherit</field>-->
+<!--        <field name="view_mode"></field>-->
+<!--    </record>-->
+
+</odoo>

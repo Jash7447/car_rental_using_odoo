@@ -1,0 +1,104 @@
+<odoo>
+
+    <record id="book_ride_tree_view" model="ir.ui.view">
+        <field name="name">Car Checkout Tree View</field>
+        <field name="model">book.ride</field>
+        <field name="arch" type="xml">
+            <tree>
+                    <field name="cus_name"/>
+                    <field name="cus_email"/>
+                    <field name="cus_phone"/>
+<!--                    <field name="cus_age"/>-->
+<!--                    <field name="cus_address"/>-->
+                    <field name="cus_city"/>
+                    <field name="driver_req"/>
+<!--                    <field name="ride_start_dt" widget="remaining_days"/>-->
+                    <field name="ride_start_dt"/>
+                    <field name="checkout_time_slots"/>
+                    <field name="ride_end_date"/>
+                    <field name="car1"/>
+<!--                    <field name="days_interval"/>-->
+                    <field name="total_cost"/>
+                    <field name="book_status" decoration-success="book_status == 'submitted'" decoration-info="book_status == 'draft'" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="book_ride_form_view" model="ir.ui.view">
+        <field name="name">Car Checkout Form View</field>
+        <field name="model">book.ride</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <button name="submit_action" string="Submit" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('book_status','in',['submitted','cancel'])]}"/>
+                        <button name="action_cancel" string="Cancel" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('book_status','in',['submitted','cancel'])]}"/>
+                        <button name="action_draft" string="Add to drft" type="object"
+                                class="oe_highlight" attrs="{'invisible':[('book_status','in',['draft'])]}"/>
+                        <field name="book_status" widget="statusbar"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="cus_name"/>
+                            <field name="cus_age"/>
+                            <field name="cus_email"/>
+                            <field name="cus_phone"/>
+                            <field name="cus_address"/>
+                            <field name="cus_city"/>
+                            <field name="driver_req"/>
+                            <field name="checkout_time_slots"/>
+                        </group>
+                        <group>
+                            <field name="ride_start_dt"/>
+                            <field name="ride_end_date"/>
+                            <field name="car1"/>
+                            <field name="days_interval" force_save="1"/>
+                            <field name="cost_per_day1" />
+                            <field name="total_cost" force_save="1"/>
+                            <field name="ride_booked"/>
+                        </group>
+                    </group>
+                    <button name="%(car_rental.action_car_checkout_info)d" type="action" class="oe_highlight" string="Checkout"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="book_ride_calendar_view" model="ir.ui.view">
+        <field name="name">book ride calendar view</field>
+        <field name="model">book.ride</field>
+        <field name="arch" type="xml">
+            <calendar date_start="ride_start_dt">
+                <field name="cus_name"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="car_booking_search_view" model="ir.ui.view">
+        <field name="name">Car booking search View</field>
+        <field name="model">book.ride</field>
+        <field name="arch" type="xml">
+            <search>
+<!--                <field name="cus_name"/>-->
+                <group expand="1" string="Group By">
+                    <filter name="cus_name" string="Customer" context="{'group_by': 'cus_name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_book_ride_info" model="ir.actions.act_window">
+        <field name="name">Book_ride</field>
+        <field name="res_model">book.ride</field>
+        <field name="view_mode">tree,form,calendar</field>
+<!--        <field name="domain">[('id','=',active_id)]</field>-->
+<!--        <field name="help" type="html">-->
+<!--          <p class="o_view_nocontent_smiling_face">-->
+<!--            Create your First Appointment !-->
+<!--          </p>-->
+<!--        </field>-->
+        <field name="context">{'search_default_cus_name': 1}</field>
+    </record>
+</odoo>

@@ -1,0 +1,40 @@
+<odoo>
+    <record id="book_ride_wizard_form_view" model="ir.ui.view">
+        <field name="name">Book Ride Wizard Form View</field>
+        <field name="model">book.ride.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="cus_name"/>
+                    <field name="cus_email"/>
+                    <field name="cus_phone"/>
+                    <field name="cus_age"/>
+                    <field name="driver_req"/>
+                    <field name="ride_start_dt"/>
+                    <field name="ride_end_date"/>
+                    <field name="checkout_time_slots"/>
+                </group>
+                <group>
+                    <field name="car1"/>
+                    <field name="days_interval" force_save="1"/>
+                    <field name="cost_per_day" force_save="1"/>
+                    <field name="total_cost" force_save="1"/>
+                    <field name="ride_booked"/>
+                </group>
+                <footer>
+                    <button name="create_booking" type="object" string="Create" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_book_ride_wizard_info" model="ir.actions.act_window">
+        <field name="name">Car_checkout</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">book.ride.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="book_ride_wizard_form_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
